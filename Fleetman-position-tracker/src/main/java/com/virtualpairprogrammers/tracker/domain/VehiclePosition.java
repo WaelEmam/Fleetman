@@ -1,20 +1,17 @@
 package com.virtualpairprogrammers.tracker.domain;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import com.couchbase.client.java.repository.annotation.Field;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.data.annotation.Id;
 
-//import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.math.BigDecimal;
+import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.couchbase.core.mapping.Document;
-import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
-import com.couchbase.client.java.repository.annotation.Field;
-import org.springframework.data.couchbase.core.mapping.Document;
+//import javax.persistence.Entity;
 
 
 //import static org.springframework.data.couchbase.core.mapping.id.GenerationStrategy.UNIQUE;
@@ -34,11 +31,7 @@ public class VehiclePosition implements Comparable<VehiclePosition>
 
 	@NotNull
 	@Field
-	private BigDecimal lat;
-
-	@NotNull
-	@Field
-	private BigDecimal longitude;
+	private LatLong latLong;
 	
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone="UTC")
 	@NotNull
@@ -49,11 +42,10 @@ public class VehiclePosition implements Comparable<VehiclePosition>
 	
 	VehiclePosition() {}
 	
-	VehiclePosition(String id, String name, BigDecimal lat, BigDecimal lng, Date timestamp, BigDecimal speed) {
+	VehiclePosition(String id, String name, LatLong latLong, Date timestamp, BigDecimal speed) {
 		this.id = id;
 		this.name = name;
-		this.lat = lat;
-		this.longitude = lng;
+		this.latLong = latLong;
 		this.timestamp = timestamp;
 		this.speed = speed;
 	}
@@ -101,12 +93,8 @@ public class VehiclePosition implements Comparable<VehiclePosition>
 		return this.name;
 	}
 
-	public BigDecimal getLat() {
-		return this.lat;
-	}
-
-	public BigDecimal getLongitude() {
-		return this.longitude;
+	public LatLong getLatLong() {
+		return this.latLong;
 	}
 
 	public Date getTimestamp() {
@@ -119,7 +107,7 @@ public class VehiclePosition implements Comparable<VehiclePosition>
 
 	@Override
 	public String toString() {
-		return "VehiclePosition [id=" + id + "name=" + name + ", lat=" + lat + ", longitude=" + longitude + ", timestamp="
+		return "VehiclePosition [id=" + id + "name=" + name + ", lat=" + latLong.getLat() + ", longitude=" + latLong.getLng() + ", timestamp="
 				+ timestamp + ", speed=" + speed + "]";
 	}
 

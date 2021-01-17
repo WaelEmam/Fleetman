@@ -1,26 +1,23 @@
 package com.virtualpairprogrammers.tracker.data;
 
+import com.virtualpairprogrammers.tracker.domain.VehicleBuilder;
+import com.virtualpairprogrammers.tracker.domain.VehicleNotFoundException;
+import com.virtualpairprogrammers.tracker.domain.VehiclePosition;
+import org.gavaghan.geodesy.Ellipsoid;
+import org.gavaghan.geodesy.GeodeticCalculator;
+import org.gavaghan.geodesy.GlobalPosition;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.couchbase.core.query.N1qlPrimaryIndexed;
+import org.springframework.stereotype.Repository;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.virtualpairprogrammers.tracker.domain.VehicleBuilder;
-import org.gavaghan.geodesy.Ellipsoid;
-import org.gavaghan.geodesy.GlobalPosition;
-import org.gavaghan.geodesy.GeodeticCalculator;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 //import org.springframework.context.annotation.Profile;
-import org.springframework.data.couchbase.core.query.N1qlPrimaryIndexed;
-import org.springframework.data.couchbase.core.query.ViewIndexed;
-import org.springframework.stereotype.Repository;
-
-import com.virtualpairprogrammers.tracker.domain.VehicleNotFoundException;
-import com.virtualpairprogrammers.tracker.domain.VehiclePosition;
 
 
 /**
@@ -122,8 +119,8 @@ public class DataCouchbaseDbImpl implements Data {
 
 		BigDecimal timeInSeconds = new BigDecimal(timeInMillis / 1000.0);
 
-		GlobalPosition pointA = new GlobalPosition(posA.getLat().doubleValue(), posA.getLongitude().doubleValue(), 0.0);
-		GlobalPosition pointB = new GlobalPosition(posB.getLat().doubleValue(), posB.getLongitude().doubleValue(), 0.0);
+		GlobalPosition pointA = new GlobalPosition(posA.getLatLong().getLat().doubleValue(), posA.getLatLong().getLng().doubleValue(), 0.0);
+		GlobalPosition pointB = new GlobalPosition(posB.getLatLong().getLat().doubleValue(), posB.getLatLong().getLng().doubleValue(), 0.0);
 
 		double distance = geoCalc.calculateGeodeticCurve(Ellipsoid.WGS84, pointA, pointB).getEllipsoidalDistance(); // Distance between Point A and Point B
 		BigDecimal distanceInMetres = new BigDecimal (""+ distance);

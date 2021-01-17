@@ -1,7 +1,5 @@
 package com.virtualpairprogrammers.tracker.domain;
 
-import com.virtualpairprogrammers.tracker.data.CustomCouchbaseConfig;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,8 +7,7 @@ public class VehicleBuilder
 {
 	private String id;
 	private String name;
-	private BigDecimal lat;
-	private BigDecimal lng;
+	private LatLong latLong;
 	private Date timestamp;
 	private BigDecimal speed;
 
@@ -28,15 +25,9 @@ public class VehicleBuilder
 		return this;
 	}
 	
-	public VehicleBuilder withLat(BigDecimal lat)
+	public VehicleBuilder withLatLong(LatLong latLong)
 	{
-		this.lat = lat;
-		return this;
-	}
-	
-	public VehicleBuilder withLng(BigDecimal lng)
-	{
-		this.lng = lng;
+		this.latLong = latLong;
 		return this;
 	}
 	
@@ -52,22 +43,18 @@ public class VehicleBuilder
 	
 	public VehiclePosition build()
 	{
-		return new VehiclePosition(id, name, lat, lng, timestamp, speed);
+		return new VehiclePosition(id, name, latLong, timestamp, speed);
 	}
 
-	public VehicleBuilder withLat(String lat) {
-		return this.withLat(new BigDecimal(lat));
+	public VehicleBuilder withLatLong(String lat,String lng) {
+		return this.withLatLong(new LatLong(new BigDecimal(lat),new BigDecimal(lng)));
 	}
 
-	public VehicleBuilder withLng(String lng) {
-		return this.withLng(new BigDecimal(lng));
-	}
 
 	public VehicleBuilder withVehiclePostion(VehiclePosition data) {
 		this.id = data.getId();
 		this.name = data.getName();
-		this.lat = data.getLat();
-		this.lng = data.getLongitude();
+		this.latLong = data.getLatLong();
 		this.timestamp = data.getTimestamp();
 		this.speed = data.getSpeed();
 

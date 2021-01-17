@@ -1,15 +1,14 @@
 package com.virtualpairprogrammers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
-import org.junit.Test;
-
 import com.virtualpairprogrammers.tracker.data.Data;
 import com.virtualpairprogrammers.tracker.data.DataBasicInMemoryImpl;
 import com.virtualpairprogrammers.tracker.domain.VehicleBuilder;
 import com.virtualpairprogrammers.tracker.domain.VehicleNotFoundException;
 import com.virtualpairprogrammers.tracker.domain.VehiclePosition;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * These tests are based on rough measurements on a real map. Therefore, we only expect
@@ -25,8 +24,7 @@ public class TestSpeedCalculations {
 		// 1: 53.33507, -1.53766
 		VehiclePosition report1 = new VehicleBuilder()
 										.withName("city_truck")
-										.withLat("53.33507")
-										.withLng("-1.53766")
+										.withLatLong("53.33507","-1.53766")
 										.withTimestamp(TestUtils.getDateFrom("Wed Jul 05 10:26:24 BST 2017"))
 										.build();
 										
@@ -38,8 +36,7 @@ public class TestSpeedCalculations {
 		// Point 2 is measured at 153m apart. 53.33635, -1.53682
 		VehiclePosition report2 = new VehicleBuilder()
 				.withName("city_truck")
-				.withLat("53.33635")
-				.withLng("-1.53682")
+				.withLatLong("53.33635","-1.53682")
 				.withTimestamp(TestUtils.getDateFrom("Wed Jul 05 10:26:29 BST 2017"))
 				.build();
 		
@@ -61,8 +58,7 @@ public class TestSpeedCalculations {
 		// These two points are on OS grid lines 1km apart, as measured by Memory Map.
 		VehiclePosition report1 = new VehicleBuilder()
 				.withName("city_truck")
-				.withLat("53.33393")
-				.withLng("-1.52097")
+				.withLatLong("53.33393","-1.52097")
 				.withTimestamp(TestUtils.getDateFrom("Wed Jul 05 10:26:00 BST 2017"))
 				.build();
 		data.updatePosition(report1);
@@ -72,8 +68,7 @@ public class TestSpeedCalculations {
 		
 		VehiclePosition report2 = new VehicleBuilder()
 				.withName("city_truck")
-				.withLat("53.34292")
-				.withLng("-1.52083")
+				.withLatLong("53.34292","-1.52083")
 				.withTimestamp(TestUtils.getDateFrom("Wed Jul 05 10:27:00 BST 2017"))
 				.build();
 		data.updatePosition(report2);
@@ -90,8 +85,7 @@ public class TestSpeedCalculations {
 		
 		VehiclePosition report1 = new VehicleBuilder()
 				.withName("city_truck")
-				.withLat("53.33393")
-				.withLng("-1.52097")
+				.withLatLong("53.33393","-1.52097")
 				.withTimestamp(TestUtils.getDateFrom("Wed Jul 05 10:26:00 BST 2017"))
 				.build();
 		data.updatePosition(report1);
@@ -101,8 +95,7 @@ public class TestSpeedCalculations {
 		
 		VehiclePosition report2 = new VehicleBuilder()
 				.withName("city_truck")
-				.withLat("53.33393")
-				.withLng("-1.52097")
+				.withLatLong("53.33393","-1.52097")
 				.withTimestamp(TestUtils.getDateFrom("Wed Jul 05 10:26:05 BST 2017"))
 				.build();
 		
@@ -120,24 +113,21 @@ public class TestSpeedCalculations {
 		// These two points are on OS grid lines 1km apart, as measured by Memory Map.
 		VehiclePosition report1 = new VehicleBuilder()
 				.withName("city_truck")
-				.withLat("53.33393")
-				.withLng("-1.52097")
+				.withLatLong("53.33393","-1.52097")
 				.withTimestamp(TestUtils.getDateFrom("Wed Jul 05 10:26:00 BST 2017"))
 				.build();
 		data.updatePosition(report1);
 			
 		VehiclePosition report2 = new VehicleBuilder()
 				.withName("city_truck")
-				.withLat("53.34292")
-				.withLng("-1.52083")
+				.withLatLong("53.34292","-1.52083")
 				.withTimestamp(TestUtils.getDateFrom("Wed Jul 05 10:27:00 BST 2017"))
 				.build();
 		data.updatePosition(report2);
 		
 		VehiclePosition report3 = new VehicleBuilder()
 				.withName("city_truck")
-				.withLat("53.33635")
-				.withLng("-1.53682")
+				.withLatLong("53.33635","-1.53682")
 				.withTimestamp(TestUtils.getDateFrom("Wed Jul 05 10:28:24 BST 2017"))
 				.build();		
 		data.updatePosition(report3);

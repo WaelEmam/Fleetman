@@ -1,13 +1,7 @@
 //Testing Couchbase methods here
 package com.virtualpairprogrammers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-//import com.virtualpairprogrammers.tracker.data.CustomCouchbaseConfig;
 import com.virtualpairprogrammers.tracker.data.Data;
-
 import com.virtualpairprogrammers.tracker.data.PositionRepository;
 import com.virtualpairprogrammers.tracker.domain.VehicleBuilder;
 import com.virtualpairprogrammers.tracker.domain.VehicleNotFoundException;
@@ -22,10 +16,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringRunner;
 
-
 import java.util.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+
+//import com.virtualpairprogrammers.tracker.data.CustomCouchbaseConfig;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -57,59 +52,54 @@ public class TestBasicOperationsCouchbase {
 		// Set to trap any problems with non UK locales
 		Locale.setDefault(new Locale("tr", "TR"));
 
+
+
 		firstReport = new VehicleBuilder()
 				.withId("key:1")
 				.withName("who cares")
-				.withLat("1.0")
-				.withLng("1.0")
+				.withLatLong("1.0","1.0")
 				.withTimestamp(TestUtils.getDateFrom("Wed Feb 01 10:26:12 BST 2017"))
 				.build();
 
 		secondReport = new VehicleBuilder()
 				.withId("key:2")
 				.withName("who cares")
-				.withLat("2.0")
-				.withLng("2.0")
+				.withLatLong("2.0","2.0")
 				.withTimestamp(TestUtils.getDateFrom("Mon May 01 10:26:12 BST 2017"))
 				.build();
 
 		thirdReport = new VehicleBuilder()
 				.withId("key:3")
 				.withName("who cares")
-				.withLat("3.0")
-				.withLng("3.0")
+				.withLatLong("3.0","3.0")
 				.withTimestamp(TestUtils.getDateFrom("Wed Jul 05 10:26:12 BST 2017"))
 				.build();
 
 		fourthReport = new VehicleBuilder()
 						.withId("key:4")
 						.withName("who cares")
-						.withLat("4.0")
-						.withLng("4.0")
+						.withLatLong("4.0","4.0")
 						.withTimestamp(TestUtils.getDateFrom("Wed Jul 05 10:26:24 BST 2017"))
 						.build();
 
 		fifthReport = new VehicleBuilder()
 				.withId("key:5")
 				.withName("who cares")
-				.withLat("5.0")
-				.withLng("5.0")
+				.withLatLong("5.0","5.0")
 				.withTimestamp(TestUtils.getDateFrom("Wed Jul 05 10:26:30 BST 2017"))
 				.build();
 
 		sixthReport = new VehicleBuilder()
 				.withId("key:6")
 				.withName("who cares")
-				.withLat("6.0")
-				.withLng("6.0")
+				.withLatLong("6.0","6.0")
 				.withTimestamp(TestUtils.getDateFrom("Thu Jul 06 10:26:12 BST 2017"))
 				.build();
 
 		seventhReport = new VehicleBuilder()
 				.withId("key:7")
 				.withName("who cares")
-				.withLat("7.0")
-				.withLng("7.0")
+				.withLatLong("7.0","7.0")
 				.withTimestamp(TestUtils.getDateFrom("Wed May 09 19:55:12 BST 2018"))
 				.build();
 

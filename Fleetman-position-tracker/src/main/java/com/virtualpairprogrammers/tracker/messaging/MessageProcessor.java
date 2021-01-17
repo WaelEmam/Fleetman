@@ -1,5 +1,13 @@
 package com.virtualpairprogrammers.tracker.messaging;
 
+import com.virtualpairprogrammers.tracker.data.Data;
+import com.virtualpairprogrammers.tracker.domain.LatLong;
+import com.virtualpairprogrammers.tracker.domain.VehicleBuilder;
+import com.virtualpairprogrammers.tracker.domain.VehiclePosition;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -7,15 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jms.annotation.JmsListener;
-import org.springframework.stereotype.Component;
-import com.virtualpairprogrammers.tracker.data.Data;
-import com.virtualpairprogrammers.tracker.domain.VehicleBuilder;
-import com.virtualpairprogrammers.tracker.domain.VehiclePosition;
 
 @Component
 public class MessageProcessor {
@@ -30,12 +29,13 @@ public class MessageProcessor {
 	{
 		String positionDatestamp = incomingMessage.get("time");
 		Date convertedDatestamp = format.parse(positionDatestamp);
-		
+
+		LatLong latLong = LatLong.buildLatLong(new BigDecimal(incomingMessage.get("lat")),new BigDecimal(incomingMessage.get("long")));
+
 		VehiclePosition newReport = new VehicleBuilder()
 				                          .withId(UUID.randomUUID().toString())
 				                          .withName(incomingMessage.get("vehicle"))
-				                          .withLat(new BigDecimal(incomingMessage.get("lat")))
-				                          .withLng(new BigDecimal(incomingMessage.get("long")))
+				                          .withLatLong(latLong)
 				                          .withTimestamp(convertedDatestamp)
 				                          .build();
 
