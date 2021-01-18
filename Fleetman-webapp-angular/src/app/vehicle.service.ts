@@ -41,8 +41,8 @@ export class VehicleService  {
     let newVehicle = new Vehicle(
                                  body.id,
                                  body.name,
-                                 Number(body.lat),
-                                 Number(body.longitude),
+                                 Number(body.latLong.lat),
+                                 Number(body.latLong.lng),
                                  body.timestamp,
                                 Number(body.speed));
     this.subscription.next(newVehicle);

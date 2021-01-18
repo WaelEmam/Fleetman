@@ -1,13 +1,12 @@
 package com.virtualpairprogrammers.api.domain;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.math.BigDecimal;
+import java.util.Date;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -15,9 +14,8 @@ public class VehiclePosition implements Comparable<VehiclePosition>
 {
 	private String id;
 	private String name;
-	private BigDecimal lat;
-	private BigDecimal longitude;
-	
+	private LatLong latLong;
+
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone="UTC")
 	private Date timestamp;
 	private BigDecimal speed;
@@ -67,12 +65,8 @@ public class VehiclePosition implements Comparable<VehiclePosition>
 		return this.name;
 	}
 
-	public BigDecimal getLat() {
-		return this.lat;
-	}
-
-	public BigDecimal getLongitude() {
-		return this.longitude;
+	public LatLong getLatLong() {
+		return this.latLong;
 	}
 
 	public Date getTimestamp() {

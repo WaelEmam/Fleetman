@@ -1,22 +1,15 @@
 package com.virtualpairprogrammers.api.controllers;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
+import com.virtualpairprogrammers.api.domain.LatLong;
+import com.virtualpairprogrammers.api.domain.VehiclePosition;
+import com.virtualpairprogrammers.api.services.PositionTrackingExternalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import com.virtualpairprogrammers.api.domain.LatLong;
-import com.virtualpairprogrammers.api.domain.VehiclePosition;
-import com.virtualpairprogrammers.api.services.PositionTrackingExternalService;
+import java.util.*;
 
 @Controller
 @RequestMapping("/")
@@ -50,7 +43,7 @@ public class VehicleController
 		Collection<VehiclePosition> vehicles = externalService.getHistoryFor(vehicleName);
 		for (VehiclePosition next: vehicles)
 		{
-			LatLong position = new LatLong(next.getLat(), next.getLongitude()); 
+			LatLong position = new LatLong(next.getLatLong().getLat(), next.getLatLong().getLng());
 			results.add(position);
 		}
 		Collections.reverse((List<?>) results);
