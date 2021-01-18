@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableCircuitBreaker
 @EnableFeignClients
-class FleetmanApiGateway {
+public class FleetmanApiGateway {
     public static void main(String[] args) {
         SpringApplication.run(FleetmanApiGateway.class, args);
     }
