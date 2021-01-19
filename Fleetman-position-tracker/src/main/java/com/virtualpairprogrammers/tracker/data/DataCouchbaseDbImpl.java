@@ -119,8 +119,8 @@ public class DataCouchbaseDbImpl implements Data {
 
 		BigDecimal timeInSeconds = new BigDecimal(timeInMillis / 1000.0);
 
-		GlobalPosition pointA = new GlobalPosition(posA.getLatLong().getLat().doubleValue(), posA.getLatLong().getLng().doubleValue(), 0.0);
-		GlobalPosition pointB = new GlobalPosition(posB.getLatLong().getLat().doubleValue(), posB.getLatLong().getLng().doubleValue(), 0.0);
+		GlobalPosition pointA = new GlobalPosition(posA.getLatLong().getLat().doubleValue(), posA.getLatLong().getlon().doubleValue(), 0.0);
+		GlobalPosition pointB = new GlobalPosition(posB.getLatLong().getLat().doubleValue(), posB.getLatLong().getlon().doubleValue(), 0.0);
 
 		double distance = geoCalc.calculateGeodeticCurve(Ellipsoid.WGS84, pointA, pointB).getEllipsoidalDistance(); // Distance between Point A and Point B
 		BigDecimal distanceInMetres = new BigDecimal (""+ distance);

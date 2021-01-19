@@ -1,6 +1,6 @@
 package com.virtualpairprogrammers.tracker.messaging;
 
-import com.virtualpairprogrammers.tracker.domain.LatLong;
+import com.virtualpairprogrammers.tracker.domain.geo;
 import com.virtualpairprogrammers.tracker.domain.VehicleBuilder;
 import com.virtualpairprogrammers.tracker.domain.VehiclePosition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import java.util.Map;
 public class LocalDevelopmentMessageSender {
     private static final String[] testVehicleNames = {"Test Vehicle 1", "Test Vehicle 2", "Test Vehicle 3", "Test Vehicle 4", "Test Vehicle 5"};
     private static final BigDecimal startLat = new BigDecimal("53.383882");
-    private static final BigDecimal startLng = new BigDecimal("-1.483979");
+    private static final BigDecimal startlon = new BigDecimal("-1.483979");
     private DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
     private VehiclePosition[] lastPositions;
 
@@ -43,7 +43,7 @@ public class LocalDevelopmentMessageSender {
         lastPositions = new VehiclePosition[testVehicleNames.length];
         for (int i = 0; i < testVehicleNames.length; i++) {
             String testVehicleName = testVehicleNames[i];
-            LatLong latLong = LatLong.buildLatLong(startLat,startLng);
+            geo latLong = geo.buildLatLong(startLat,startlon);
             VehiclePosition testVehicle = new VehicleBuilder().withName(testVehicleName)
                     .withLatLong(latLong)
                     .withTimestamp(new java.util.Date()).build();
@@ -61,9 +61,9 @@ public class LocalDevelopmentMessageSender {
         VehiclePosition lastPosition = lastPositions[randomVehicleIndex];
 
         BigDecimal newLat = lastPosition.getLatLong().getLat().add(new BigDecimal("" + randomChangeX));
-        BigDecimal newLng = lastPosition.getLatLong().getLng().add(new BigDecimal("" + randomChangeY));
+        BigDecimal newlon = lastPosition.getLatLong().getlon().add(new BigDecimal("" + randomChangeY));
 
-        LatLong latLong = LatLong.buildLatLong(newLat,newLng);
+        geo latLong = geo.buildLatLong(newLat,newlon);
 
         VehiclePosition newPosition = new VehicleBuilder().withName(lastPosition.getName())
                 .withLatLong(latLong)
@@ -76,7 +76,7 @@ public class LocalDevelopmentMessageSender {
         Map<String, String> mapMessage = new HashMap<>();
         mapMessage.put("vehicle", position.getName());
         mapMessage.put("lat", position.getLatLong().getLat().toString());
-        mapMessage.put("long", position.getLatLong().getLng().toString());
+        mapMessage.put("long", position.getLatLong().getlon().toString());
         mapMessage.put("time", format.format(position.getTimestamp()));
         template.convertAndSend(destination, mapMessage);
     }

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class LatLong implements Comparable<LatLong>{
+public class geo implements Comparable<geo>{
 
     @NotNull
     @Field
@@ -18,15 +18,15 @@ public class LatLong implements Comparable<LatLong>{
 
     @NotNull
     @Field
-    private BigDecimal lng;
+    private BigDecimal lon;
 
-    LatLong(BigDecimal lat, BigDecimal lng){
+    geo(BigDecimal lat, BigDecimal lon){
         this.lat = lat;
-        this.lng = lng;
+        this.lon = lon;
     }
 
     @Override
-    public int compareTo(LatLong o)
+    public int compareTo(geo o)
     {
         return o.compareTo(this);
     }
@@ -36,7 +36,7 @@ public class LatLong implements Comparable<LatLong>{
         final int prime = 31;
         int result = 1;
         result = prime * result + ((lat == null) ? 0 : lat.hashCode());
-        result = prime * result + ((lng == null) ? 0 : lng.hashCode());
+        result = prime * result + ((lon == null) ? 0 : lon.hashCode());
         return result;
     }
 
@@ -48,29 +48,29 @@ public class LatLong implements Comparable<LatLong>{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        LatLong other = (LatLong) obj;
+        geo other = (geo) obj;
         if (lat == null) {
             if (other.lat != null)
                 return false;
         } else if (!lat.equals(other.lat))
             return false;
-        if (lng == null) {
-            if (other.lng != null)
+        if (lon == null) {
+            if (other.lon != null)
                 return false;
-        } else if (!lng.equals(other.lng))
+        } else if (!lon.equals(other.lon))
             return false;
         return true;
     }
 
-    public static LatLong buildLatLong(BigDecimal lat,BigDecimal lon){
-       return new LatLong(lat,lon);
+    public static geo buildLatLong(BigDecimal lat,BigDecimal lon){
+       return new geo(lat,lon);
     }
 
     public BigDecimal getLat() {
         return this.lat;
     }
 
-    public BigDecimal getLng() {
-        return this.lng;
+    public BigDecimal getlon() {
+        return this.lon;
     }
 }

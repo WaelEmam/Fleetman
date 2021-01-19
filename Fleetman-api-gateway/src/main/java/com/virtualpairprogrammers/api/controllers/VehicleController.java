@@ -1,6 +1,6 @@
 package com.virtualpairprogrammers.api.controllers;
 
-import com.virtualpairprogrammers.api.domain.LatLong;
+import com.virtualpairprogrammers.api.domain.geo;
 import com.virtualpairprogrammers.api.domain.VehiclePosition;
 import com.virtualpairprogrammers.api.services.PositionTrackingExternalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +37,13 @@ public class VehicleController
 	@GetMapping("/history/{vehicleName}")
 	@ResponseBody
     @CrossOrigin(origins = "*")
-	public Collection<LatLong> getHistoryFor(@PathVariable("vehicleName") String vehicleName)
+	public Collection<geo> getHistoryFor(@PathVariable("vehicleName") String vehicleName)
 	{
-		Collection<LatLong> results = new ArrayList<>();
+		Collection<geo> results = new ArrayList<>();
 		Collection<VehiclePosition> vehicles = externalService.getHistoryFor(vehicleName);
 		for (VehiclePosition next: vehicles)
 		{
-			LatLong position = new LatLong(next.getLatLong().getLat(), next.getLatLong().getLng());
+			geo position = new geo(next.getLatLong().getLat(), next.getLatLong().getLng());
 			results.add(position);
 		}
 		Collections.reverse((List<?>) results);

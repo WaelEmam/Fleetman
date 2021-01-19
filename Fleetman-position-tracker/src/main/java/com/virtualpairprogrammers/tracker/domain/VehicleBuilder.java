@@ -7,7 +7,7 @@ public class VehicleBuilder
 {
 	private String id;
 	private String name;
-	private LatLong latLong;
+	private geo latLong;
 	private Date timestamp;
 	private BigDecimal speed;
 
@@ -25,7 +25,7 @@ public class VehicleBuilder
 		return this;
 	}
 	
-	public VehicleBuilder withLatLong(LatLong latLong)
+	public VehicleBuilder withLatLong(geo latLong)
 	{
 		this.latLong = latLong;
 		return this;
@@ -46,8 +46,8 @@ public class VehicleBuilder
 		return new VehiclePosition(id, name, latLong, timestamp, speed);
 	}
 
-	public VehicleBuilder withLatLong(String lat,String lng) {
-		return this.withLatLong(new LatLong(new BigDecimal(lat),new BigDecimal(lng)));
+	public VehicleBuilder withLatLong(String lat,String lon) {
+		return this.withLatLong(new geo(new BigDecimal(lat),new BigDecimal(lon)));
 	}
 
 

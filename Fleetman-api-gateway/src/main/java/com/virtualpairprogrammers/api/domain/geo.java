@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class LatLong
+public class geo
 {
 	private BigDecimal lat;
 	private BigDecimal lng;;
@@ -21,9 +21,9 @@ public class LatLong
 		return lng;
 	}
 
-	LatLong() {}
+	geo() {}
 	
-	public LatLong(BigDecimal lat, BigDecimal lng) {
+	public geo(BigDecimal lat, BigDecimal lng) {
 		this.lat = lat;
 		this.lng = lng;
 	}
@@ -45,7 +45,7 @@ public class LatLong
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LatLong other = (LatLong) obj;
+		geo other = (geo) obj;
 		if (lat == null) {
 			if (other.lat != null)
 				return false;

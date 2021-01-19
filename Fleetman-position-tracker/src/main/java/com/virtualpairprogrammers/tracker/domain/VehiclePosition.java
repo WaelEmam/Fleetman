@@ -31,7 +31,7 @@ public class VehiclePosition implements Comparable<VehiclePosition>
 
 	@NotNull
 	@Field
-	private LatLong latLong;
+	private geo latLong;
 	
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone="UTC")
 	@NotNull
@@ -42,7 +42,7 @@ public class VehiclePosition implements Comparable<VehiclePosition>
 	
 	VehiclePosition() {}
 	
-	VehiclePosition(String id, String name, LatLong latLong, Date timestamp, BigDecimal speed) {
+	VehiclePosition(String id, String name, geo latLong, Date timestamp, BigDecimal speed) {
 		this.id = id;
 		this.name = name;
 		this.latLong = latLong;
@@ -93,7 +93,7 @@ public class VehiclePosition implements Comparable<VehiclePosition>
 		return this.name;
 	}
 
-	public LatLong getLatLong() {
+	public geo getLatLong() {
 		return this.latLong;
 	}
 
@@ -107,7 +107,7 @@ public class VehiclePosition implements Comparable<VehiclePosition>
 
 	@Override
 	public String toString() {
-		return "VehiclePosition [id=" + id + "name=" + name + ", lat=" + latLong.getLat() + ", longitude=" + latLong.getLng() + ", timestamp="
+		return "VehiclePosition [id=" + id + "name=" + name + ", lat=" + latLong.getLat() + ", longitude=" + latLong.getlon() + ", timestamp="
 				+ timestamp + ", speed=" + speed + "]";
 	}
 

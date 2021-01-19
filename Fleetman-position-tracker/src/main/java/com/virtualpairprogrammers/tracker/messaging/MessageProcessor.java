@@ -1,7 +1,7 @@
 package com.virtualpairprogrammers.tracker.messaging;
 
 import com.virtualpairprogrammers.tracker.data.Data;
-import com.virtualpairprogrammers.tracker.domain.LatLong;
+import com.virtualpairprogrammers.tracker.domain.geo;
 import com.virtualpairprogrammers.tracker.domain.VehicleBuilder;
 import com.virtualpairprogrammers.tracker.domain.VehiclePosition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class MessageProcessor {
 		String positionDatestamp = incomingMessage.get("time");
 		Date convertedDatestamp = format.parse(positionDatestamp);
 
-		LatLong latLong = LatLong.buildLatLong(new BigDecimal(incomingMessage.get("lat")),new BigDecimal(incomingMessage.get("long")));
+		geo latLong = geo.buildLatLong(new BigDecimal(incomingMessage.get("lat")),new BigDecimal(incomingMessage.get("long")));
 
 		VehiclePosition newReport = new VehicleBuilder()
 				                          .withId(UUID.randomUUID().toString())

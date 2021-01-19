@@ -29,11 +29,11 @@ public class CustomCouchbaseConfig extends AbstractCouchbaseConfiguration {
 
     @Override
     protected String getBucketPassword() {
-        return "password";
+        return "couchbase";
     }
 
     @Override
-    protected String getUsername() { return "admin"; }
+    protected String getUsername() { return "test"; }
 
         @Override
     public CouchbaseCustomConversions customConversions() {
